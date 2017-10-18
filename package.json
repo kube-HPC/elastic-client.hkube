@@ -1,0 +1,24 @@
+{
+  "name": "elastic-client.rf",
+  "version": "1.0.0",
+  "description": "elastic-search client",
+  "main": "index.js",
+  "dependencies": {
+    "elasticsearch": "^13.0.0-beta2",
+    "lodash": "2.4.2"
+  },
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mockery": "^1.4.0",
+    "sinon": "^1.17.1"
+  },
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.rms:RMS-Common/elastic-client.git"
+  },
+  "author": "Nassi Harel",
+  "license": "ISC"
+}
