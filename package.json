@@ -1,5 +1,5 @@
 {
-  "name": "elastic-client.rf",
+  "name": "elastic-client.hkube",
   "version": "1.0.0",
   "description": "elastic-search client",
   "main": "index.js",
