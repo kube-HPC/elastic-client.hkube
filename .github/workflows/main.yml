@@ -30,8 +30,6 @@ jobs:
             - name: lint
               run: |
                   npm run lint
-              with:
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
     publish:
         if: github.ref == 'refs/heads/main'
         needs: test
