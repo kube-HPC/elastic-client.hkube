@@ -27,15 +27,9 @@ jobs:
                   node-version: 14.x
 
             - run: npm ci
-            - name: setup
-              run: |
-                  npm run start:mongo
-            - name: lint and test
+            - name: lint
               run: |
                   npm run lint
-                  npm run test:cov
-            - name: Coveralls
-              uses: coverallsapp/github-action@v1.1.2
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
     publish:
