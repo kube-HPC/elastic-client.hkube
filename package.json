@@ -4,8 +4,8 @@
   "description": "elastic-search client",
   "main": "index.js",
   "dependencies": {
-    "elasticsearch": "^13.0.0-beta2",
-    "lodash": "2.4.2"
+    "elasticsearch": "^15.0.0",
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "chai": "^3.3.0",
