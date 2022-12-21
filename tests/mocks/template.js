@@ -2,23 +2,15 @@
 var options = {
     name: 'elastic-test-template',
     body: {
-        "template": "elastic-test-*",
+        "index_patterns": "elastic-test-*",
         "mappings": {
             "testMapping": {
                 "properties": {
                     "recordID": {
-                        "type": "string",
-                        "index": "not_analyzed"
+                        "type": "string"
                     },
                     "timestamp": {
                         "type": "date"
-                    },
-                    "location": {
-                        "type": "geo_shape",
-                        "tree": "quadtree"
-                    },
-                    "centroid": {
-                        "type": "geo_point"
                     }
                 }
             }

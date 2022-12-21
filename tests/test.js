@@ -10,7 +10,7 @@ var mockIndex = require('./mocks/index.js');
 var mockDocument = require('./mocks/document.js');
 
 var client = new ElasticClient({
-    host: 'http://localhost:9200',
+    node: 'http://localhost:9200',
     //log: ['info', 'trace', 'warning', 'debug'],
     enableLivenessCheck: false,
     livenessCheckInterval: 5000
@@ -27,10 +27,10 @@ function keepAlive() {
 
     let bulk = [];
     for (let i = 0; i < 200; i++) {
-        bulk.push({index: {_index: mockIndex.index, _type: mockIndex.type}});
+        bulk.push({ index: { _index: mockIndex.index, _type: mockIndex.type } });
         bulk.push(mockDocument);
     }
-    client.bulk({body: bulk}).then((response) => {
+    client.bulk({ body: bulk }).then((response) => {
         setTimeout(() => {
             keepAlive();
         }, 1000)

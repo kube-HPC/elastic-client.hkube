@@ -20,11 +20,11 @@ describe('ElasticClient', function () {
 
         const url = 'http://localhost:9200';
         client = new ElasticClient({
-            host: url,
+            node: url,
             enableLivenessCheck: true,
             livenessCheckInterval: -1
         });
-        client.deleteIndex({index: 'elastic-test-*'}).then((response) => {
+        client.deleteIndex({ index: 'elastic-test-*' }).then((response) => {
             done();
         });
     });
@@ -74,7 +74,7 @@ describe('ElasticClient', function () {
         });
         describe('isIndexExists', function () {
             it('should indicating whether given index exists', function (done) {
-                client.isIndexExists({index: mockIndex.index}).then((response) => {
+                client.isIndexExists({ index: mockIndex.index }).then((response) => {
                     expect(response).to.equal(true);
                     done();
                 });
@@ -82,7 +82,7 @@ describe('ElasticClient', function () {
         });
         describe('getIndex', function () {
             it('should success to create job', function (done) {
-                client.getIndex({index: mockIndex.index}).then((response) => {
+                client.getIndex({ index: mockIndex.index }).then((response) => {
                     expect(Object.keys(response)[0]).to.equal(mockIndex.index);
                     done();
                 });
@@ -90,7 +90,7 @@ describe('ElasticClient', function () {
         });
         describe('deleteIndex', function () {
             it('should success to create job', function (done) {
-                client.deleteIndex({index: mockIndex.index}).then((response) => {
+                client.deleteIndex({ index: mockIndex.index }).then((response) => {
                     expect(response.acknowledged).to.equal(true);
                     done();
                 });
@@ -137,7 +137,7 @@ describe('ElasticClient', function () {
                     name: mockTemplate.name,
                     body: mockTemplate.body
                 }).then((response) => {
-                    client.deleteTemplate({name: mockTemplate.name}).then((response) => {
+                    client.deleteTemplate({ name: mockTemplate.name }).then((response) => {
                         expect(response.acknowledged).to.equal(true);
                         done();
                     }).catch((error) => {
@@ -152,7 +152,7 @@ describe('ElasticClient', function () {
                     name: mockTemplate.name,
                     body: mockTemplate.body
                 }).then((response) => {
-                    client.getTemplate({name: mockTemplate.name}).then((response) => {
+                    client.getTemplate({ name: mockTemplate.name }).then((response) => {
                         //to.deep.equal
                         expect(Object.keys(response)[0]).to.equal(mockTemplate.name);
                         done();
@@ -166,7 +166,7 @@ describe('ElasticClient', function () {
                     name: mockTemplate.name,
                     body: mockTemplate.body
                 }).then((response) => {
-                    client.existsTemplate({name: mockTemplate.name}).then((response) => {
+                    client.existsTemplate({ name: mockTemplate.name }).then((response) => {
                         expect(response).to.equal(true);
                         done();
                     });
@@ -190,10 +190,10 @@ describe('ElasticClient', function () {
             it('should success to create job', function (done) {
                 let bulk = [];
                 for (let i = 0; i < 20; i++) {
-                    bulk.push({index: {_index: mockIndex.index, _type: mockIndex.type}});
+                    bulk.push({ index: { _index: mockIndex.index, _type: mockIndex.type } });
                     bulk.push(mockDocument);
                 }
-                client.bulk({body: bulk}).then((response) => {
+                client.bulk({ body: bulk }).then((response) => {
                     expect(response.items.length).to.equal(bulk.length / 2);
                     done();
                 });
@@ -211,11 +211,11 @@ describe('ElasticClient', function () {
                     let body = {
                         size: 1,
                         query: {
-                            bool: {filter: [{term: {recordID: mockDocument.recordID}}]}
+                            bool: { filter: [{ term: { recordID: mockDocument.recordID } }] }
                         }
                     };
                     setTimeout(() => {
-                        client.search({index: mockIndex.index, type: mockIndex.type, body: body}).then((response) => {
+                        client.search({ index: mockIndex.index, type: mockIndex.type, body: body }).then((response) => {
                             expect(response.hits[0].recordID).to.equal(mockDocument.recordID);
                             done();
                         });
@@ -230,13 +230,13 @@ describe('ElasticClient', function () {
                 let q = {
                     size: 1,
                     query: {
-                        bool: {filter: [{term: {recordID: mockDocument.recordID}}]}
+                        bool: { filter: [{ term: { recordID: mockDocument.recordID } }] }
                     }
                 };
-                body.push({index: mockIndex.index, type: mockIndex.type});
+                body.push({ index: mockIndex.index, type: mockIndex.type });
                 body.push(q);
                 setTimeout(() => {
-                    client.msearch({body: body}).then((response) => {
+                    client.msearch({ body: body }).then((response) => {
                         expect(response[0].recordID).to.equal(mockDocument.recordID);
                         done();
                     });
@@ -245,8 +245,8 @@ describe('ElasticClient', function () {
         });
         describe('getByID', function () {
             it('should get a document from the index based on its id', function (done) {
-                client.index({index: mockIndex.index, type: mockIndex.type, body: mockDocument}).then((response) => {
-                    client.getByID({index: mockIndex.index, type: mockIndex.type, id: response._id}).then((response) => {
+                client.index({ index: mockIndex.index, type: mockIndex.type, body: mockDocument }).then((response) => {
+                    client.getByID({ index: mockIndex.index, type: mockIndex.type, id: response._id }).then((response) => {
                         expect(response.recordID).to.equal(mockDocument.recordID);
                         done();
                     });
@@ -256,8 +256,8 @@ describe('ElasticClient', function () {
         });
         describe('deleteByID', function () {
             it('should delete a document from a specific index based on its id', function (done) {
-                client.index({index: mockIndex.index, type: mockIndex.type, body: mockDocument}).then((indexResponse) => {
-                    client.deleteByID({index: mockIndex.index, type: mockIndex.type, id: indexResponse._id}).then((deleteResponse) => {
+                client.index({ index: mockIndex.index, type: mockIndex.type, body: mockDocument }).then((indexResponse) => {
+                    client.deleteByID({ index: mockIndex.index, type: mockIndex.type, id: indexResponse._id }).then((deleteResponse) => {
                         expect(indexResponse._id).to.equal(deleteResponse._id);
                         done();
                     });
