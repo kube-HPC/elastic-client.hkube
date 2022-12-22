@@ -13,7 +13,8 @@ var client = new ElasticClient({
     node: 'http://localhost:9200',
     //log: ['info', 'trace', 'warning', 'debug'],
     enableLivenessCheck: false,
-    livenessCheckInterval: 5000
+    livenessCheckInterval: 5000,
+    token: 'ssss'
 });
 
 client.putTemplate({

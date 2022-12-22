@@ -4,7 +4,7 @@
   "description": "elastic-search client",
   "main": "index.js",
   "dependencies": {
-    "@elastic/elasticsearch": "8.5",
+    "@elastic/elasticsearch": "7.17.0",
     "lodash": "2.4.2"
   },
   "devDependencies": {
