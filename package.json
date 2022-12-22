@@ -1,6 +1,6 @@
 {
   "name": "@hkube/elastic-client",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "elastic-search client",
   "main": "index.js",
   "dependencies": {
